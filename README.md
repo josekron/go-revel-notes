@@ -12,7 +12,11 @@ Example of REST API with Go and Revel framework
 
    * http://localhost:9000/notes
    * http://localhost:9000/notes/:noteId
-    
+
+### Tests:
+
+   * http://localhost:9000/@tests
+   
 ## Documentation
 
 * The [Getting Started with Revel](http://revel.github.io/tutorial/gettingstarted.html).
