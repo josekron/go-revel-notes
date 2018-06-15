@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"josekron/go-revel-notes/app/models"
 
 	"github.com/revel/revel"
@@ -34,4 +35,9 @@ func (c NoteController) Show(noteId int) revel.Result {
 	}
 
 	return c.RenderJSON(res)
+}
+
+func (c NoteController) checkUser() revel.Result {
+	fmt.Printf("Check user... \n")
+	return nil
 }
