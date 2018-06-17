@@ -11,6 +11,7 @@ GET     /                                       App.Index
 
 GET     /notes                                  NoteController.List
 GET     /notes/:noteId                          NoteController.Show
+GET     /notes/tags/:tags                          NoteController.FilterTags
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
