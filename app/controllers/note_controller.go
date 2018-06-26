@@ -1,12 +1,15 @@
 package controllers
 
 import (
-	"fmt"
 	"josekron/go-revel-notes/app/models"
+	"log"
+	"os"
 	"strings"
 
 	"github.com/revel/revel"
 )
+
+var logger *log.Logger
 
 type NoteController struct {
 	*revel.Controller
@@ -16,6 +19,11 @@ var notes = []models.Note{
 	models.Note{1, "Shopping list", "Milk, eggs, coffee", []string{"cooking", "product", "shopping"}},
 	models.Note{2, "Password router", "12345", []string{"security", "password"}},
 	models.Note{3, "John´s phone", "612345567", []string{"phone", "contact", "personal"}},
+}
+
+func init() {
+	file, _ := os.OpenFile("app.log", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0777)
+	logger = log.New(file, "noteController: ", log.Ldate|log.Ltime|log.Lshortfile)
 }
 
 func (c NoteController) List() revel.Result {
@@ -39,7 +47,7 @@ func (c NoteController) Show(noteId int) revel.Result {
 }
 
 func (c NoteController) FilterTags(tags string) revel.Result {
-	fmt.Println("FilterTags - tags: %s", tags)
+	logger.Println("Filter tags: %s", tags)
 	var tagList = strings.Split(tags, ",")
 	var result = []models.Note{}
 
@@ -56,6 +64,6 @@ func (c NoteController) FilterTags(tags string) revel.Result {
 }
 
 func (c NoteController) checkUser() revel.Result {
-	fmt.Println("Check user...")
+	logger.Println("Check user...")
 	return nil
 }
